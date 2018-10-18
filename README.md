@@ -1,1 +1,1 @@
-# apchemcs360
+# CS 360 - WKU - AP Chemistry
