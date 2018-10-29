@@ -8,8 +8,13 @@ include "classes/Query.php" ;
 
 //this is just a test page at the moment
 
-$query = new Query("SELECT username FROM users") ;
-echo $query->execute() ;
+$query = new Query("SELECT username, password FROM users") ;
+if ($query->execute()) {
+  print_r($query->getResult()) ;
+}
+else {
+  echo "failure" ;
+}
 
 
 

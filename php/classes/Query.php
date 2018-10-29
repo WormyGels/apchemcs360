@@ -5,10 +5,8 @@
 * performs the query that you pass to it with constructor
 * execute method executes the query and returns apporpriate info
 * There query will return 3 of the following possibilities
-* 1. A 0 for a failure
-* 2. A 1 for success with a no return query
-* 3. A json object containing the data in the query
-* TODO needs to return that JSON object, the third possibility
+* 1. A false for a failure
+* 2. A true for success with a no return query
 */
 
 class Query {
@@ -16,6 +14,7 @@ class Query {
   private $queryString ;
   private $bindVars = "" ;
   private $variables ;
+  private $result ;
 
 
   //constructor for the class
@@ -39,17 +38,26 @@ class Query {
       //try and execute the statement
       if ($stmt->execute()) {
         //TODO this needs to return stuff IF the query that was passed has something to return
+        $result = $stmt->get_result() ;
+        $i = 0 ;
+        while ($row = mysqli_fetch_object($result)) {
+          $this->result[$i] = $row ;
+          $i++ ;
+        }
         //this will probably be best done in a json object
-        return 1 ;
+        return true ;
       }
       else {
-        return 0 ;
+        return false ;
       }
     }
     else {
-      return 0 ;
+      return true ;
     }
 
+  }
+  function getResult() {
+    return $this->result ;
   }
 
 }
