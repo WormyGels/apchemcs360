@@ -39,10 +39,17 @@ class Query {
       if ($stmt->execute()) {
         //TODO this needs to return stuff IF the query that was passed has something to return
         if($result = $stmt->get_result()) {
-          $i = 0 ;
-          while ($row = mysqli_fetch_object($result)) {
-            $this->result[$i] = $row ;
-            $i++ ;
+          //we may have more than 1 result
+          if ($result->num_rows > 1) {
+            $i = 0 ;
+            while ($row = mysqli_fetch_object($result)) {
+              $this->result[$i] = $row ;
+              $i++ ;
+            }
+          }
+          //just 1 result
+          else {
+            $this->result = mysqli_fetch_object($result) ;
           }
         }
         //this will probably be best done in a json object

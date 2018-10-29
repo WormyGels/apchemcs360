@@ -17,9 +17,10 @@ if (isset($_POST['username'], $_POST['password'])) {
   $query = new Query("SELECT username, user_id FROM users WHERE username=? AND password=?", "ss", array($username, $password)) ;
   if ($query->execute() && $query->hasResult()) {
     $result = $query->getResult() ;
-    //remember result is always an array
-    echo "User ID: ".$result[0]->user_id."<br>" ; //TODO temporary
-    echo "Username: ".$result[0]->username ; //TODO temporary
+    //depending on the specicifity of the query, we can either get an array or just a single object
+    //depends on the number of rows you expect to be returned
+    echo "User ID: ".$result->user_id."<br>" ; //TODO temporary
+    echo "Username: ".$result->username ; //TODO temporary
   }
   else {
     echo "Failure" ;
