@@ -38,11 +38,12 @@ class Query {
       //try and execute the statement
       if ($stmt->execute()) {
         //TODO this needs to return stuff IF the query that was passed has something to return
-        $result = $stmt->get_result() ;
-        $i = 0 ;
-        while ($row = mysqli_fetch_object($result)) {
-          $this->result[$i] = $row ;
-          $i++ ;
+        if($result = $stmt->get_result()) {
+          $i = 0 ;
+          while ($row = mysqli_fetch_object($result)) {
+            $this->result[$i] = $row ;
+            $i++ ;
+          }
         }
         //this will probably be best done in a json object
         return true ;
@@ -55,6 +56,12 @@ class Query {
       return true ;
     }
 
+  }
+  function hasResult() {
+    if (isset($this->result)) {
+      return true ;
+    }
+    return false ;
   }
   function getResult() {
     return $this->result ;
