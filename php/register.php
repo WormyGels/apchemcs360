@@ -25,7 +25,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['special_key'], $_POST[
   //if the key is valid
   if ($_POST['special_key'] == $specialKey) {
 
-    $query = new Query("INSERT INTO users (user_type, username, password) VALUES (?, ?, ?)", "iss", array($type, $username, $password)) ;
+    $query = new Query("INSERT INTO users (user_type, username, password) VALUES (?, ?, ?)", array($type, $username, $password)) ;
     if ($query->execute()) {
       echo "Success" ;
     }
@@ -50,7 +50,7 @@ else if (isset($_POST['username'], $_POST['password'], $_POST['type'])) {
   //hash the password
   $password = hash('ripemd160', $password) ;
 
-  $query = new Query("INSERT INTO users (user_type, username, password) VALUES (?, ?, ?)", "iss", array($type, $username, $password)) ;
+  $query = new Query("INSERT INTO users (user_type, username, password) VALUES (?, ?, ?)", array($type, $username, $password)) ;
   if ($query->execute()) {
     echo "Success" ;
   }

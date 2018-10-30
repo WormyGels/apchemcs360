@@ -18,9 +18,29 @@ class Query {
 
 
   //constructor for the class
-  function __construct($query, $type = "", $vars = null) {
+  function __construct($query, $vars = null) {
     $this->queryString = $query ;
-    $this->bindVars = $type ;
+    if ($vars != null && gettype($vars) != "array" && count($vars) < 2) {
+      $vars = array($vars) ;
+    }
+    if ($vars != null) {
+      for ($i = 0 ; $i < count($vars) ; $i++) {
+        switch (gettype($vars[$i])) {
+          case "integer":
+            $this->bindVars = $this->bindVars."i" ;
+            break ;
+          case "string":
+            $this->bindVars = $this->bindVars."s" ;
+            break ;
+          case "double":
+            $this->bindVars = $this->bindVars."d" ;
+            break ;
+          default:
+            $this->bindVars = $this->bindVars."s" ;
+            break ;
+        }
+      }
+    }
     $this->variables = $vars ;
   }
   //executes our query
