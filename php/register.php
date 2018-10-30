@@ -28,9 +28,11 @@ if (isset($_POST['username'], $_POST['password'], $_POST['special_key'], $_POST[
     $query = new Query("INSERT INTO users (user_type, username, password) VALUES (?, ?, ?)", array($type, $username, $password)) ;
     if ($query->execute()) {
       echo "Success" ;
+      //redirect to login
     }
     else {
       echo "Failure" ;
+      //redirect to register page
     }
 
   }
