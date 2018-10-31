@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2018 at 06:16 AM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 7.0.30
+-- Generation Time: Oct 31, 2018 at 01:26 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,43 +25,55 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `classes`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `user_type` int(11) NOT NULL,
-  `username` text NOT NULL,
-  `password` text NOT NULL
+CREATE TABLE `classes` (
+  `class_id` int(11) NOT NULL,
+  `instructor_id` int(11) NOT NULL,
+  `class_name` text NOT NULL,
+  `join_key` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `classes`
 --
 
-INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`) VALUES
-(1, 1, 'test1', '5e52fee47e6b070565f74372468cdc699de89107'),
-(2, 3, 'test2', '013bc84affed0fd19721ff66c561db7f63c2d6aa');
+INSERT INTO `classes` (`class_id`, `instructor_id`, `class_name`, `join_key`) VALUES
+(1, 3, 'Dr Galloway Section 1', 'FZnzD1RYKXohVO5ug83b9U0faAwHvQJd'),
+(2, 3, 'Dr Galloway Section 2', 'G4UmvRsDwc1nrOMEpHF90We6NyabYgIJ'),
+(3, 5, 'Jeremy Section 1', 'PwOEA1y93Ir8YsgaGkBVb6HCjvdxDqzZ');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `users`
+-- Indexes for table `classes`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `classes`
+  ADD PRIMARY KEY (`class_id`),
+  ADD KEY `instructor` (`instructor_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT for table `classes`
 --
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `classes`
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `classes`
+--
+ALTER TABLE `classes`
+  ADD CONSTRAINT `instructor` FOREIGN KEY (`instructor_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
