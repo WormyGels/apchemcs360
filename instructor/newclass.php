@@ -56,77 +56,24 @@ if (isset($_POST["classname"])) {
   </head>
 
   <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php">AP Chemistry</a>
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="../logout.php">Sign out</a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link" href="index.php">
-                  <span data-feather="home"></span>
-                  Home <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="grades.php">
-                  <span data-feather="file"></span>
-                  Gradebook
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="quizzes.php">
-                  <span data-feather="shopping-cart"></span>
-                  Create a Quiz
-                </a>
-              </li>
-            </ul>
-
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>MANAGE ASSIGNMENTS</span>
-              <a class="d-flex align-items-center text-muted" href="">
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-            <?php require_once "getclasses.php" ; ?>
-            <li class="nav-item">
-              <a class="nav-link active" href="newclass.php">
-                <span data-feather="file-text"></span>
-                Create a New Class
-              </a>
-            </li>
-            </ul>
-          </div>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">New Class</h1>
-          </div>
-          <div class="container">
-            <form method="post">
-              <div class="form-group">
-                <label>Class Name</label>
-                <input name="classname" type="input" class="form-control" id="classnameInput" placeholder="Class Name">
-              </div>
-              <button type="submit" class="btn btn-primary">Create</button>
-              <div class="form-group">
-                <label><?php echo $message ; ?></label>
-              </div>
-            </form>
-          </div>
-        </main>
+    <?php require_once "nav.php" ; ?>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">New Class</h1>
       </div>
-    </div>
+      <div class="container">
+        <form method="post">
+          <div class="form-group">
+            <label>Class Name</label>
+            <input name="classname" type="input" class="form-control" id="classnameInput" placeholder="Class Name">
+          </div>
+          <button type="submit" class="btn btn-primary">Create</button>
+          <div class="form-group">
+            <label><?php echo $message ; ?></label>
+          </div>
+        </form>
+      </div>
+    </main>
 
     <script src="../js/jquery-3.3.1.js" crossorigin="anonymous"></script>
     <script src="../js/popper.js"></script>
