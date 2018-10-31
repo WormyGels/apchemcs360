@@ -14,7 +14,7 @@ if (isset($_SESSION["user"])) {
     <meta name="author" content="JWells, AKirby, SGreen">
     <link rel="icon" href="">
 
-    <title>AP Chemistry - Sign in</title>
+    <title>AP Chemistry - Register</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/cover.css" rel="stylesheet">
