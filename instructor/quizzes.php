@@ -23,9 +23,45 @@ $query->execute() ;
 
 //redirect them to assignment page for the just created quiz
 if (isset($_POST["question"], $_POST["quiz_name"], $_POST["class_id"])) {
+  $quizName = $_POST["quiz_name"] ;
+  $classId = $_POST["class_id"] ;
 
 //add question to database and then retrieve the quiz id to redirect them
 //add questions to database in loop
+$quizQuery = new Query("INSERT INTO quizzes (quiz_name, class_id) VALUES (?, ?);", array($quizName, $classId)) ;
+$quiz = new Query("SELECT quiz_id FROM quizzes ORDER BY quiz_id DESC LIMIT 1") ;
+if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
+  $quizId = $quiz->getResult()->quiz_id ;
+  if (isset($_POST["question"])) {
+    $quizQuestions = $_POST["question"] ;
+    $quizAnsA = $_POST["answera"] ;
+    $quizAnsB = $_POST["answerb"] ;
+    $quizAnsC = $_POST["answerc"] ;
+    $quizAnsD = $_POST["answerd"] ;
+    $quizAnsE = $_POST["answere"] ;
+    $quizAnsF = $_POST["answerf"] ;
+    $quizCorAns = $_POST["answercor"] ;
+    for($i = 0 ; $i < count($quizQuestions) ; $i++) {
+      $questionText = $quizQuestions[$i] ;
+      $ansA = $quizAnsA[$i] ;
+      $ansB = $quizAnsB[$i] ;
+      $ansC = $quizAnsC[$i] ;
+      $ansD = $quizAnsD[$i] ;
+      $ansE = $quizAnsE[$i] ;
+      $ansF = $quizAnsF[$i] ;
+      $corAns = $quizCorAns[$i] ;
+      $question = new Query("INSERT INTO quiz_questions (quiz_id, question_text, ans1_text, ans2_text, ans3_text, ans4_text, ans5_text, ans6_text, correct_answer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", array($quizId, $questionText, $ansA, $ansB, $ansC, $ansD, $ansE, $ansF, $corAns)) ;
+      if ($question->execute()) {
+        //redirect to quiz page on appropriate class TODO
+      }
+      else {
+        //display a failure message TODO
+      }
+    }
+  }
+}
+
+
 }
 
 ?>
@@ -125,6 +161,29 @@ if (isset($_POST["question"], $_POST["quiz_name"], $_POST["class_id"])) {
                 <div class="col-sm-2">
                   <label>F</label>
                   <input name="answerf[]" type="text" class="form-control" placeholder="F">
+                </div>
+              </div>
+              <div class="text-left" style="padding-top:20px ;">
+                <label>Correct Answer</label><br>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary active">
+                    <input value=1 type="radio" name="answercor" autocomplete="off" checked="checked" checked> A
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input  value=2 type="radio" name="answercor" autocomplete="off"> B
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input value=3 type="radio" name="answercor" autocomplete="off"> C
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input value=4 type="radio" name="answercor" autocomplete="off"> D
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input value=5 type="radio" name="answercor" autocomplete="off"> E
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input value=6 type="radio" name="answercor" autocomplete="off"> F
+                  </label>
                 </div>
               </div>
             </div>
