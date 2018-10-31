@@ -60,25 +60,19 @@ if ($user->type() != 2) {
               <li class="nav-item">
                 <a class="nav-link" href="grades.php">
                   <span data-feather="file"></span>
-                  Grades
+                  Gradebook
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="quizzes.php">
                   <span data-feather="shopping-cart"></span>
-                  Quizzes
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="assignments.php">
-                  <span data-feather="users"></span>
-                  Assignments
+                  Create a Quiz
                 </a>
               </li>
             </ul>
 
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>YOUR CLASSES</span>
+              <span>MANAGE ASSIGNMENTS</span>
               <a class="d-flex align-items-center text-muted" href="">
                 <span data-feather="plus-circle"></span>
               </a>

@@ -17,4 +17,12 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 * All account types can change their own password.
 
 ## Current Functionality
-Not very much at all
+* Login System
+* Registration
+* Instructors can create classes
+
+## TODO
+* Create a quiz system (both instructor and student end)
+* Gradebook for instructors
+* Student panel
+* Admin panel

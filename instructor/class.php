@@ -17,16 +17,16 @@ if ($user->type() != 2) {
 }
 //if we are on a valid class
 $className = "Error" ;
+$joinKey = "Error" ;
 if (isset($_GET["class"])) {
   require_once "../php/classes/Query.php" ;
-  $query = new Query("SELECT class_name FROM classes WHERE class_id=?", $_GET["class"]) ;
+  $query = new Query("SELECT class_name, join_key FROM classes WHERE class_id=?", $_GET["class"]) ;
   if ($query->execute() && $query->hasResult()) {
     $className = $query->getResult()->class_name ;
+    $joinKey = $query->getResult()->join_key ;
   }
 
 }
-
-
 
 ?>
 
@@ -39,7 +39,7 @@ if (isset($_GET["class"])) {
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>AP Chemistry - Instructor Dashboard</title>
+    <title>AP Chemistry - <?php echo $className ; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -72,25 +72,19 @@ if (isset($_GET["class"])) {
               <li class="nav-item">
                 <a class="nav-link" href="grades.php">
                   <span data-feather="file"></span>
-                  Grades
+                  Gradebook
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="quizzes.php">
                   <span data-feather="shopping-cart"></span>
-                  Quizzes
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="assignments.php">
-                  <span data-feather="users"></span>
-                  Assignments
+                  Create a Quiz
                 </a>
               </li>
             </ul>
 
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>YOUR CLASSES</span>
+              <span>MANAGE ASSIGNMENTS</span>
               <a class="d-flex align-items-center text-muted" href="">
                 <span data-feather="plus-circle"></span>
               </a>
@@ -117,7 +111,11 @@ if (isset($_GET["class"])) {
               </button> -->
             </div>
           </div>
-
+          <div class="container">
+            <h1 class="h3">Class Key</h1>
+            <h1 class="h5"><?php echo $joinKey ; ?></h1>
+            <span>Give students this key so they can join the course.</span>
+          </div>
         </main>
       </div>
     </div>
