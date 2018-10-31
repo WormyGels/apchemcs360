@@ -1,6 +1,6 @@
 //numbers of questions on page
 var questions = 1 ;
-var maxQuestions = 15
+var maxQuestions = 50
 
 //when jquery loads
 $(function() {
