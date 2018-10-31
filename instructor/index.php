@@ -104,8 +104,8 @@ if ($user->type() != 2) {
       </div>
     </div>
 
-    <script src="js/jquery-3.3.1.js" crossorigin="anonymous"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.3.1.js" crossorigin="anonymous"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>
