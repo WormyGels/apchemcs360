@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2018 at 04:26 AM
+-- Generation Time: Oct 31, 2018 at 06:15 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -44,7 +44,9 @@ INSERT INTO `classes` (`class_id`, `instructor_id`, `class_name`, `join_key`) VA
 (2, 3, 'Dr Galloway Section 2', 'G4UmvRsDwc1nrOMEpHF90We6NyabYgIJ'),
 (3, 5, 'Jeremy Section 1', 'PwOEA1y93Ir8YsgaGkBVb6HCjvdxDqzZ'),
 (4, 3, 'Dr Galloway Section 3', '69CaASmkotlDN5K7xFBvwzduWy8Tre4b'),
-(5, 3, 'Dr Galloway Section 4', '8lCuST3jsqQ7imxPAfVo1beZkWJzOIDa');
+(5, 3, 'Dr Galloway Section 4', '8lCuST3jsqQ7imxPAfVo1beZkWJzOIDa'),
+(6, 5, 'Jeremy Section 2', 'AgONsPIj24hSkEyYKHrqwXDQMJxeafTl'),
+(7, 8, 'Clown School', 'VrI6awW4X0nR5eJHE3mhpjbc2idSuFQY');
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,8 @@ CREATE TABLE `in_class` (
 
 CREATE TABLE `quizzes` (
   `quiz_id` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL
+  `class_id` int(11) NOT NULL,
+  `quiz_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -83,7 +86,8 @@ CREATE TABLE `quiz_questions` (
   `ans2_text` text NOT NULL,
   `ans3_text` text NOT NULL,
   `ans4_text` text NOT NULL,
-  `ans5_text` text NOT NULL
+  `ans5_text` text NOT NULL,
+  `ans6_text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -110,7 +114,9 @@ INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`) VALUES
 (4, 1, 'DrAtici', '76fec56b10f61c595c4d638ef0a41f1476cb3f19'),
 (5, 2, 'InstructorJeremy', 'b17d52e132dd23769847e73e18fcf885c8415181'),
 (6, 2, 'InstructorAustin', '94804f3c9409fdde61b83714a50d376a84a72f50'),
-(7, 3, 'StudentJeremy', '013bc84affed0fd19721ff66c561db7f63c2d6aa');
+(7, 3, 'StudentJeremy', '013bc84affed0fd19721ff66c561db7f63c2d6aa'),
+(8, 2, 'NewBoy', '013bc84affed0fd19721ff66c561db7f63c2d6aa'),
+(9, 2, 'EvenNewerBoy', '013bc84affed0fd19721ff66c561db7f63c2d6aa');
 
 --
 -- Indexes for dumped tables
@@ -157,7 +163,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `quizzes`
@@ -175,7 +181,7 @@ ALTER TABLE `quiz_questions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
