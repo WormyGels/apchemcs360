@@ -16,6 +16,9 @@ if ($user->type() != 2) {
   header("Location: ../index.php") ;
 }
 
+$successModal = false ;
+$failureModal = false ;
+
 require_once("../php/classes/Query.php") ;
 
 $query = new Query("SELECT class_name, class_id FROM classes WHERE instructor_id=?", $user->getId()) ;
@@ -52,10 +55,10 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
       $corAns = $quizCorAns[$i] ;
       $question = new Query("INSERT INTO quiz_questions (quiz_id, question_text, ans1_text, ans2_text, ans3_text, ans4_text, ans5_text, ans6_text, correct_answer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", array($quizId, $questionText, $ansA, $ansB, $ansC, $ansD, $ansE, $ansF, $corAns)) ;
       if ($question->execute()) {
-        //redirect to quiz page on appropriate class TODO
+        $successModal = true ;
       }
       else {
-        //display a failure message TODO
+        $failureModal = true ;
       }
     }
   }
@@ -215,6 +218,9 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/instructor/new-quiz.js" crossorigin="anonymous"></script>
+
+    <?php if ($successModal) include "modals/quiz-created.php" ; ?>
+    <?php if ($failureModal) include "modals/quiz-failed.php" ; ?>
 
   </body>
 </html>
