@@ -6,6 +6,12 @@
 
 session_start() ;
 require_once "../php/UserBundle.php" ;
+$message = "" ;
+
+//generates random string for join key
+function generateKey($length = 32) {
+  return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length) ;
+}
 //if we aren't logged in
 if (!isset($_SESSION["user"])) {
   header("Location: ../index.php") ;
@@ -14,6 +20,19 @@ $user = unserialize($_SESSION["user"]) ;
 //we are logged in but not as a teacher
 if ($user->type() != 2) {
   header("Location: ../index.php") ;
+}
+//now we can check for form
+if (isset($_POST["classname"])) {
+  $name = $_POST["classname"] ;
+  require_once "../php/classes/Query.php" ;
+  $key = generateKey() ;
+  $query = new Query("INSERT INTO classes (instructor_id, class_name, join_key) VALUES (?, ?, ?)", array($user->getId(), $name, $key)) ;
+  if ($query->execute()) {
+    $message = "Class \"$name\" created. Give key \"$key\" to your students." ;
+  }
+  else {
+    $message = "There was a problem creating the class." ;
+  }
 }
 
 ?>
@@ -27,7 +46,7 @@ if ($user->type() != 2) {
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>AP Chemistry - Instructor Dashboard</title>
+    <title>AP Chemistry - Create a Class</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +71,7 @@ if ($user->type() != 2) {
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="index.php">
+                <a class="nav-link" href="index.php">
                   <span data-feather="home"></span>
                   Home <span class="sr-only">(current)</span>
                 </a>
@@ -84,9 +103,9 @@ if ($user->type() != 2) {
               </a>
             </h6>
             <ul class="nav flex-column mb-2">
-              <?php require_once "getclasses.php" ; ?>
+            <?php require_once "getclasses.php" ; ?>
             <li class="nav-item">
-              <a class="nav-link" href="newclass.php">
+              <a class="nav-link active" href="newclass.php">
                 <span data-feather="file-text"></span>
                 Create a New Class
               </a>
@@ -97,15 +116,20 @@ if ($user->type() != 2) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Overview</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <!-- <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-              </button> -->
-            </div>
+            <h1 class="h2">New Class</h1>
           </div>
-
+          <div class="container">
+            <form method="post">
+              <div class="form-group">
+                <label>Class Name</label>
+                <input name="classname" type="input" class="form-control" id="classnameInput" placeholder="Class Name">
+              </div>
+              <button type="submit" class="btn btn-primary">Create</button>
+              <div class="form-group">
+                <label><?php echo $message ; ?></label>
+              </div>
+            </form>
+          </div>
         </main>
       </div>
     </div>

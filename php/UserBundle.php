@@ -1,8 +1,8 @@
 <?php
 
-include "classes/User.php" ;
-include "classes/Student.php" ;
-include "classes/Administrator.php" ;
-include "classes/Instructor.php" ;
+require_once "classes/User.php" ;
+require_once "classes/Student.php" ;
+require_once "classes/Administrator.php" ;
+require_once "classes/Instructor.php" ;
 
 ?>

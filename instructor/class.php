@@ -15,6 +15,18 @@ $user = unserialize($_SESSION["user"]) ;
 if ($user->type() != 2) {
   header("Location: ../index.php") ;
 }
+//if we are on a valid class
+$className = "Error" ;
+if (isset($_GET["class"])) {
+  require_once "../php/classes/Query.php" ;
+  $query = new Query("SELECT class_name FROM classes WHERE class_id=?", $_GET["class"]) ;
+  if ($query->execute() && $query->hasResult()) {
+    $className = $query->getResult()->class_name ;
+  }
+
+}
+
+
 
 ?>
 
@@ -52,7 +64,7 @@ if ($user->type() != 2) {
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="index.php">
+                <a class="nav-link" href="index.php">
                   <span data-feather="home"></span>
                   Home <span class="sr-only">(current)</span>
                 </a>
@@ -97,7 +109,7 @@ if ($user->type() != 2) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Overview</h1>
+            <h1 class="h2"><?php echo $className ; ?></h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <!-- <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <span data-feather="calendar"></span>

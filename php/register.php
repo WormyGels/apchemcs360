@@ -29,10 +29,13 @@ if (isset($_POST['username'], $_POST['password'], $_POST['special_key'], $_POST[
     if ($query->execute()) {
       echo "Success" ;
       //redirect to login
+      header("Location: ../index.php") ;
     }
     else {
       echo "Failure" ;
       //redirect to register page
+      header("Location: ../register.php") ;
+
     }
 
   }
@@ -55,9 +58,12 @@ else if (isset($_POST['username'], $_POST['password'], $_POST['type'])) {
   $query = new Query("INSERT INTO users (user_type, username, password) VALUES (?, ?, ?)", array($type, $username, $password)) ;
   if ($query->execute()) {
     echo "Success" ;
+    header("Location: ../index.php") ;
   }
   else {
     echo "Failure" ;
+    header("Location: ../index.php") ;
+
   }
 
 }
