@@ -20,7 +20,8 @@ $className = "Error" ;
 $joinKey = "Error" ;
 if (isset($_GET["class"])) {
   require_once "../php/classes/Query.php" ;
-  $query = new Query("SELECT class_name, join_key FROM classes WHERE class_id=?", $_GET["class"]) ;
+  //ensure that we are accessing one that belongs to us and not another instructor
+  $query = new Query("SELECT class_name, join_key FROM classes WHERE class_id=? AND instructor_id=?", array($_GET["class"], $user->getId())) ;
   if ($query->execute() && $query->hasResult()) {
     $className = $query->getResult()->class_name ;
     $joinKey = $query->getResult()->join_key ;
