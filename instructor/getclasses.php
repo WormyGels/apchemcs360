@@ -28,7 +28,7 @@ if ($query->execute() && $query->hasResult()) {
   else {
     ?>
     <li class="nav-item">
-      <a class="nav-link" href="class.php?class=<?php echo $result->class_id ; ?>">
+      <a class="nav-link <?php if ($urlClass == $result->class_id) echo "active" ; ?>" href="class.php?class=<?php echo $result->class_id ; ?>">
         <span data-feather="file-text"></span>
         <?php echo $result->class_name ; ?>
       </a>

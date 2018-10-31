@@ -96,7 +96,7 @@ if (isset($_GET["class"])) {
               </a>
             </h6>
             <ul class="nav flex-column mb-2">
-              <?php require_once "getclasses.php" ; ?>
+            <?php require_once "getclasses.php" ; ?>
             <li class="nav-item">
               <a class="nav-link" href="newclass.php">
                 <span data-feather="file-text"></span>
