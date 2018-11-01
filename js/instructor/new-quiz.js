@@ -2,12 +2,22 @@
 var questions = 1 ;
 var maxQuestions = 50
 
+//value of the select box which class they have selected
+var selected ;
+var tags = [] ;
+
 //when jquery loads
 $(function() {
 
+  //configure autocomplete on the categories field
+  //get categories from database via ajax
+  updateAutoComplete() ;
+
+  //or when we change it
+  $("#class-select").click(function() {updateAutoComplete() ;}) ;
+
   //when new button question is pressed
   $("#newQuestion").click(function() {
-
     if (questions < maxQuestions) {
 
       questions++ ;
@@ -80,3 +90,19 @@ $(function() {
   }) ;
 
 }) ;
+
+function updateAutoComplete() {
+  selected = $("#class-select").val() ;
+  var httpRequest1 = $.ajax("../instructor/getcategories.php?class_id="+selected).done(function(response) {
+    var jsonResp ;
+    if (response != "")
+      jsonResp = JSON.parse(response) ;
+    else
+      jsonResp = {} ;
+    tags = [] ;
+    for (var i = 0 ; i < jsonResp.length ; i++) {
+      tags[i] = jsonResp[i].quiz_category
+    }
+    $("#quiz-category").autocomplete({source: tags}) ;
+  }) ;
+}

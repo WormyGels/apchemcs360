@@ -25,13 +25,14 @@ $query = new Query("SELECT class_name, class_id FROM classes WHERE instructor_id
 $query->execute() ;
 
 //redirect them to assignment page for the just created quiz
-if (isset($_POST["question"], $_POST["quiz_name"], $_POST["class_id"])) {
+if (isset($_POST["question"], $_POST["quiz_name"], $_POST["class_id"], $_POST["quiz_category"])) {
   $quizName = $_POST["quiz_name"] ;
   $classId = $_POST["class_id"] ;
+  $quizCategory = $_POST["quiz_category"] ;
 
 //add question to database and then retrieve the quiz id to redirect them
 //add questions to database in loop
-$quizQuery = new Query("INSERT INTO quizzes (quiz_name, class_id) VALUES (?, ?);", array($quizName, $classId)) ;
+$quizQuery = new Query("INSERT INTO quizzes (quiz_name, class_id, quiz_category) VALUES (?, ?, ?)", array($quizName, $classId, $quizCategory)) ;
 $quiz = new Query("SELECT quiz_id FROM quizzes ORDER BY quiz_id DESC LIMIT 1") ;
 if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
   $quizId = $quiz->getResult()->quiz_id ;
@@ -89,6 +90,9 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+
+
 
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
@@ -111,7 +115,7 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
           <div class="align-items-center">
             <div class="form-group col-sm-12 separator">
               <label>Class</label>
-              <select name="class_id" class="custom-select">
+              <select id="class-select" name="class_id" class="custom-select">
                 <?php
                 if ($query->hasResult()) {
                   $result = $query->getResult() ;
@@ -129,7 +133,11 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
             </div>
             <div id="quizName" class="form-group col-sm-12 separator question-box">
               <div class="form-row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
+                  <label>Quiz Category</label>
+                  <input id="quiz-category" name="quiz_category" type="text" class="form-control" placeholder="Quiz Category">
+                </div>
+                <div class="col-sm-6">
                   <label>Quiz Name</label>
                   <input name="quiz_name" type="text" class="form-control" placeholder="Quiz Name">
                 </div>
@@ -215,6 +223,7 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
     </main>
 
     <script src="../js/jquery-3.3.1.js" crossorigin="anonymous"></script>
+    <script src="../js/jquery-ui.js"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/instructor/new-quiz.js" crossorigin="anonymous"></script>
