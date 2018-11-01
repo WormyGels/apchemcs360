@@ -16,8 +16,7 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 
 ## Todo
 ### Instructor Section
-* View quizzes per class by category
-* Placeholder for gradebook until student end is complete
+* Gradebook (waiting on student section)
 
 ### Student Section
 * Join a class
