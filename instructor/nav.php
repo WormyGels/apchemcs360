@@ -15,7 +15,7 @@
           <li class="nav-item">
             <a class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == "index.php") echo "active" ; ?>" href="index.php">
               <span data-feather="home"></span>
-              Home</span>
+              Home
             </a>
           </li>
           <li class="nav-item">

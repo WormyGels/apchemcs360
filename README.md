@@ -24,6 +24,8 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 * View grades
 
 ### General
+* Modal for class creation (instructor)
 * Modal for successful registration (redirect to login -> modal displays)
 * Modal for bad login info
 * Modal for bad registration info
+* Modal for invalid class registration key (or other error)
