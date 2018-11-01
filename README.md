@@ -14,13 +14,13 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 * (Maybe) AP Chemistry e-text that students can look at on site.
 * Administrators can delete student accounts, change their password, move the class they're in.
 
-## Current Functionality
-* Login System
-* Registration
-* Instructors can create classes
+## Todo
+### Instructor Section
+* Quiz categories (autosuggestions from already in database)
+* View quizzes per class by category
+* Placeholder for gradebook until student end is complete
 
-## TODO
-* Create a quiz system (both instructor and student end)
-* Gradebook for instructors
-* Student panel
-* Admin panel
+### Student Section
+* Join a class
+* Take a quiz
+* View grades
