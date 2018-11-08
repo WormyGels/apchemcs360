@@ -16,16 +16,13 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 
 ## Todo
 ### Instructor Section
-* Gradebook (waiting on student section)
+* Modal for class creation
+* Quiz types later
+* Waiting on student for gradebook
 
 ### Student Section
-* Join a class
 * Take a quiz
 * View grades
 
 ### General
-* Modal for class creation (instructor)
-* Modal for successful registration (redirect to login -> modal displays)
-* Modal for bad login info
-* Modal for bad registration info
-* Modal for invalid class registration key (or other error)
+* Messages for bad login info (GET variable)
