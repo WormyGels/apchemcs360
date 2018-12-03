@@ -35,13 +35,6 @@ if (isset($_GET["class"])) {
 
 }
 
-function _group_by($array, $key) {
-    $return = array() ;
-    foreach($array as $val) {
-        $return[$val[$key]][] = $val ;
-    }
-    return $return ;
-}
 ?>
 
 <!doctype html>
@@ -60,16 +53,9 @@ function _group_by($array, $key) {
 
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
-    <style>
-      .category {
-        padding-top: 12px ;
-        padding-bottom: 12px ;
-        border-bottom: 1px solid #dee2e6 ;
-      }
-      .section {
-        padding-bottom: 24px ;
-      }
-    </style>
+
+    <link href="../css/main.css" rel="stylesheet">
+
   </head>
 
   <body>
