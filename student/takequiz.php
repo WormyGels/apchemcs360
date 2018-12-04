@@ -28,7 +28,7 @@ $quizId = $_GET["quiz"] ;
 //just redirect them
 if (hasTakenQuiz($user, $quizId) || !hasQuiz($user, $quizId)) {
   //TODO maybe take them to grade page if they already took quiz instead of just flipping them back
-  header("Location: quizzes.php") ;
+  header("Location: grade.php?quiz=".$quizId) ;
 }
 
 //pull in the data for the quiz
