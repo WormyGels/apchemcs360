@@ -27,6 +27,7 @@ $quizId = $_GET["quiz"] ;
 //an additional check of whether or not they have already taken the quiz OR the quiz isn't for their class is required
 //just redirect them
 if (hasTakenQuiz($user, $quizId) || !hasQuiz($user, $quizId)) {
+  //TODO maybe take them to grade page if they already took quiz instead of just flipping them back
   header("Location: quizzes.php") ;
 }
 
@@ -85,37 +86,40 @@ else {
         <div class="btn-toolbar mb-2 mb-md-0"></div>
       </div>
       <div class="quiz">
-        <form method="post">
+        <form method="post" action="gradequiz.php">
+          <input type="hidden" name="quiz" value="<?php echo $quizId ; ?>">
+          <?php $questionCount = 1 ;?>
           <?php foreach ($questions as $question) { ?>
           <div class="question">
             <h6 class="question-title"><?php echo $question->question_text ; ?></h6>
             <div class="btn-group-toggle col-sm-12" data-toggle="buttons">
               <label class="btn btn-secondary radio active">
-                <input type="radio" name="answers[]" autocomplete="off" checked> A
+                <input type="radio" name="answers[<?php echo $questionCount ; ?>]" autocomplete="off" value=1 checked> A
               </label>
               <span class="question-answer"><?php echo $question->ans1_text ; ?></span><br>
               <label class="btn btn-secondary radio">
-                <input type="radio" name="answers[]" autocomplete="off"> B
+                <input type="radio" name="answers[<?php echo $questionCount ; ?>]" autocomplete="off" value=2> B
               </label>
               <span class="question-answer"><?php echo $question->ans2_text ; ?></span><br>
               <label class="btn btn-secondary radio">
-                <input type="radio" name="answers[]" autocomplete="off"> C
+                <input type="radio" name="answers[<?php echo $questionCount ; ?>]" autocomplete="off" value=3> C
               </label>
               <span class="question-answer"><?php echo $question->ans3_text ; ?></span><br>
               <label class="btn btn-secondary radio">
-                <input type="radio" name="answers[]" autocomplete="off"> D
+                <input type="radio" name="answers[<?php echo $questionCount ; ?>]" autocomplete="off" value=4> D
               </label>
               <span class="question-answer"><?php echo $question->ans4_text ; ?></span><br>
               <label class="btn btn-secondary radio">
-                <input type="radio" name="answers[]" autocomplete="off"> E
+                <input type="radio" name="answers[<?php echo $questionCount ; ?>]" autocomplete="off" value=5> E
               </label>
               <span class="question-answer"><?php echo $question->ans5_text ; ?></span><br>
               <label class="btn btn-secondary radio">
-                <input type="radio" name="answers[]" autocomplete="off"> F
+                <input type="radio" name="answers[<?php echo $questionCount ; ?>]" autocomplete="off" value=6> F
               </label>
               <span class="question-answer"><?php echo $question->ans6_text ; ?></span><br>
             </div>
           </div>
+          <?php $questionCount++ ;?>
         <?php } ?>
 
           <div class="submit-btn-container">

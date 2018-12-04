@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2018 at 05:37 AM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.10
+-- Generation Time: Dec 04, 2018 at 03:23 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 5.6.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -78,7 +78,9 @@ CREATE TABLE `in_class` (
 
 INSERT INTO `in_class` (`student_id`, `class_id`) VALUES
 (11, 1),
-(12, 1);
+(12, 1),
+(7, 2),
+(14, 1);
 
 -- --------------------------------------------------------
 
@@ -98,9 +100,8 @@ CREATE TABLE `quizzes` (
 --
 
 INSERT INTO `quizzes` (`quiz_id`, `class_id`, `quiz_name`, `quiz_category`) VALUES
-(1, 1, 'Bonds', 'Chapter 1'),
-(2, 1, 'Chemicals', 'Chapter 2'),
-(3, 1, 'Breaking Bad', 'Chapter 1');
+(1, 1, 'Test Quiz 1', 'Chapter 1'),
+(2, 1, 'Test Quiz 2', 'Chapter 1');
 
 -- --------------------------------------------------------
 
@@ -118,8 +119,21 @@ CREATE TABLE `quiz_questions` (
   `ans3_text` text NOT NULL,
   `ans4_text` text NOT NULL,
   `ans5_text` text NOT NULL,
-  `ans6_text` text NOT NULL
+  `ans6_text` text NOT NULL,
+  `correct_answer` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quiz_questions`
+--
+
+INSERT INTO `quiz_questions` (`question_id`, `quiz_id`, `question_text`, `question_type`, `ans1_text`, `ans2_text`, `ans3_text`, `ans4_text`, `ans5_text`, `ans6_text`, `correct_answer`) VALUES
+(1, 1, 'Question 1', 0, 'A', 'B', 'C', 'D', 'E', 'F', 1),
+(2, 1, 'Question 2', 0, 'G', 'H', 'I', 'J', 'K', 'L', 2),
+(3, 2, 'Question 1', 0, 'A', 'B', 'C', 'D', 'E', 'F', 2),
+(4, 2, 'Question 2', 0, 'G', 'H', 'I', 'J', 'K', 'L', 1),
+(5, 2, 'Question 3', 0, 'M', 'N', 'O', 'P', 'Q', 'R', 1),
+(6, 2, 'Question 4', 0, 'S', 'T', 'U', 'V', 'W', 'X', 5);
 
 -- --------------------------------------------------------
 
@@ -150,7 +164,9 @@ INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`) VALUES
 (9, 2, 'EvenNewerBoy', '013bc84affed0fd19721ff66c561db7f63c2d6aa'),
 (10, 2, 'Aticiland', '013bc84affed0fd19721ff66c561db7f63c2d6aa'),
 (11, 3, 'StudentAustin', '013bc84affed0fd19721ff66c561db7f63c2d6aa'),
-(12, 3, 'StudentStephen', '013bc84affed0fd19721ff66c561db7f63c2d6aa');
+(12, 3, 'StudentStephen', '013bc84affed0fd19721ff66c561db7f63c2d6aa'),
+(13, 2, 'DrOliver', '5e52fee47e6b070565f74372468cdc699de89107'),
+(14, 3, 'JeffBrown', '5e52fee47e6b070565f74372468cdc699de89107');
 
 --
 -- Indexes for dumped tables
@@ -203,19 +219,19 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `quiz_questions`
 --
 ALTER TABLE `quiz_questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

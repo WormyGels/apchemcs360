@@ -33,7 +33,7 @@ function hasQuiz($student, $quizId) {
 //checks to see if the student has already taken the passed quiz
 function hasTakenQuiz($student, $quizId) {
   require_once "Query.php" ;
-  $query = new Query("SELECT quiz_id FROM grades WHERE student_id=?", $student->getId()) ;
+  $query = new Query("SELECT quiz_id FROM grades WHERE student_id=? AND quiz_id=?", array($student->getId(), $quizId)) ;
   if ($query->execute() && $query->hasResult()) {
     return true ;
   }
