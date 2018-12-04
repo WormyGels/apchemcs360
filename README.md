@@ -17,9 +17,13 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 ### Instructor Section
 * Modal for class creation
 * Waiting on student for gradebook
+* Overview (class averages?)
 
 ### Student Section
 * Progress at login
+
+### Admin Section
+* OS commands to get general state of docker containers
 
 ### General
 * Messages for bad login info (GET variable)

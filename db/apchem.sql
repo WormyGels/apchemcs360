@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2018 at 03:23 AM
+-- Generation Time: Dec 04, 2018 at 06:45 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 5.6.38
 
@@ -57,9 +57,20 @@ INSERT INTO `classes` (`class_id`, `instructor_id`, `class_name`, `join_key`) VA
 CREATE TABLE `grades` (
   `student_id` int(11) NOT NULL,
   `quiz_id` int(11) NOT NULL,
-  `score` double NOT NULL,
+  `correct` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
   `comments` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `grades`
+--
+
+INSERT INTO `grades` (`student_id`, `quiz_id`, `correct`, `total`, `comments`) VALUES
+(14, 1, 1, 2, ''),
+(14, 2, 0, 4, ''),
+(14, 3, 1, 1, ''),
+(7, 4, 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -92,16 +103,19 @@ CREATE TABLE `quizzes` (
   `quiz_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `quiz_name` text NOT NULL,
-  `quiz_category` text NOT NULL
+  `quiz_category` text NOT NULL,
+  `points` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quizzes`
 --
 
-INSERT INTO `quizzes` (`quiz_id`, `class_id`, `quiz_name`, `quiz_category`) VALUES
-(1, 1, 'Test Quiz 1', 'Chapter 1'),
-(2, 1, 'Test Quiz 2', 'Chapter 1');
+INSERT INTO `quizzes` (`quiz_id`, `class_id`, `quiz_name`, `quiz_category`, `points`) VALUES
+(1, 1, 'Test Quiz 1', 'Chapter 1', 2),
+(2, 1, 'Test Quiz 2', 'Chapter 1', 4),
+(3, 1, 'Chemistry', 'Chapter', 10),
+(4, 2, 'Introduction to Chemistry', 'Chapter 1', 5);
 
 -- --------------------------------------------------------
 
@@ -133,7 +147,9 @@ INSERT INTO `quiz_questions` (`question_id`, `quiz_id`, `question_text`, `questi
 (3, 2, 'Question 1', 0, 'A', 'B', 'C', 'D', 'E', 'F', 2),
 (4, 2, 'Question 2', 0, 'G', 'H', 'I', 'J', 'K', 'L', 1),
 (5, 2, 'Question 3', 0, 'M', 'N', 'O', 'P', 'Q', 'R', 1),
-(6, 2, 'Question 4', 0, 'S', 'T', 'U', 'V', 'W', 'X', 5);
+(6, 2, 'Question 4', 0, 'S', 'T', 'U', 'V', 'W', 'X', 5),
+(7, 3, 'What is your favorite thing about chemistry?', 0, 'The smell', 'Cancer risk', 'Bonds', 'Atoms', 'The popular IDE', 'spongebob', 6),
+(8, 4, 'Eugen Goldtein discovered in 1886 that atoms also have...', 0, 'A negative charge', 'No charge', 'A positive charge', 'Movement', 'Temperature', 'Gold', 1);
 
 -- --------------------------------------------------------
 
@@ -219,13 +235,13 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `quiz_questions`
 --
 ALTER TABLE `quiz_questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
