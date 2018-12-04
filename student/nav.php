@@ -30,12 +30,6 @@
               View Quizzes
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link <?php if (basename($_SERVER['PHP_SELF']) == "notifications.php") echo "active" ; ?>" href="notifications.php">
-              <span data-feather="shopping-cart"></span>
-              Notifications
-            </a>
-          </li>
         </ul>
       </div>
     </nav>

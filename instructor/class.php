@@ -30,17 +30,18 @@ if (isset($_GET["class"])) {
     //categories and quizzes
     if ($query2->execute() && $query2->hasResult()) {
       $quizQuery = $query2->getResult() ;
+
+      //it always needs to be an array
+      if (count($quizQuery) == 1) {
+        $quizzes[0] = $quizQuery ;
+      }
+      else {
+        $quizzes = $quizQuery ;
+      }
     }
   }
 
-  $quizzes = [] ;
-  //it always needs to be an array
-  if (count($quizQuery) == 1) {
-    $quizzes[0] = $quizQuery ;
-  }
-  else {
-    $quizzes = $quizQuery ;
-  }
+
 }
 
 ?>
@@ -91,19 +92,21 @@ if (isset($_GET["class"])) {
         <div class="section">
           <?php if (count($quizzes) > 0) { ?> <h1 class="h2">Assignments</h1> <?php }
           $previous = "" ;
-          foreach ($quizzes as $quiz) {
-              if ($quiz->quiz_category != $previous) {
-                echo '<div class="row category"><div class="col-sm-12">' ;
-                echo '<h1 class="h6">'.$quiz->quiz_category.'</h1>' ;
-                $previous = $quiz->quiz_category ;
-                echo '<ul class="list-group">' ;
-                foreach ($quizzes as $quiznames) {
-                  if ($quiznames->quiz_category == $previous) {
-                    echo '<li class="list-group-item">'.$quiznames->quiz_name.'</li>' ;
+          if (count($quizzes) >= 1) {
+            foreach ($quizzes as $quiz) {
+                if ($quiz->quiz_category != $previous) {
+                  echo '<div class="row category"><div class="col-sm-12">' ;
+                  echo '<h1 class="h6">'.$quiz->quiz_category.'</h1>' ;
+                  $previous = $quiz->quiz_category ;
+                  echo '<ul class="list-group">' ;
+                  foreach ($quizzes as $quiznames) {
+                    if ($quiznames->quiz_category == $previous) {
+                      echo '<li class="list-group-item">'.$quiznames->quiz_name.'</li>' ;
+                    }
                   }
+                  echo "</ul></div></div>" ;
                 }
-                echo "</ul></div></div>" ;
-              }
+            }
           }
           ?>
         </div>

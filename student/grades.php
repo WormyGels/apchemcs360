@@ -26,15 +26,14 @@ if ($query->execute() && $query->hasResult()) {
   $result = $query->getResult() ;
 }
 
+echo count($result) ;
 $grades = [] ;
-if (count($result) <= 1) {
+if (count($result) == 1) {
   $grades[0] = $result ;
 }
 else {
   $grades = $result ;
 }
-
-
 
 ?>
 
@@ -77,13 +76,15 @@ else {
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($grades as $grade) { ?>
-            <tr>
-              <td><a href="grades.php?quiz=<?php echo $grade->quiz_id ; ?>"><?php echo $grade->quiz_name ; ?></a></th>
-              <td><?php echo $grade->correct."/".$grade->total ; ?></td>
-              <td><?php echo (round($grade->correct/$grade->total*100, 2))."%" ; ?></td>
-              <td><?php echo $grade->comments ; ?></td>
-            </tr>
+            <?php if (count($grades) > 0) { ?>
+              <?php foreach ($grades as $grade) { ?>
+              <tr>
+                <td><a href="grades.php?quiz=<?php echo $grade->quiz_id ; ?>"><?php echo $grade->quiz_name ; ?></a></th>
+                <td><?php echo $grade->correct."/".$grade->total ; ?></td>
+                <td><?php echo (round($grade->correct/$grade->total*100, 2))."%" ; ?></td>
+                <td><?php echo $grade->comments ; ?></td>
+              </tr>
+            <?php } ?>
           <?php } ?>
           </tbody>
         </table>
