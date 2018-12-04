@@ -21,7 +21,7 @@ if (!inClass($user)) {
 
 $result = [] ;
 //get an array of quizzes for the student
-$query = new Query("SELECT grades.quiz_id, correct, total, comments, quiz_name FROM grades, quizzes WHERE student_id=? AND quizzes.quiz_id = grades.quiz_id GROUP BY quiz_id", $user->getId()) ;
+$query = new Query("SELECT grades.quiz_id, correct, total, comments, quiz_name FROM grades, quizzes WHERE student_id=? AND quizzes.quiz_id=grades.quiz_id GROUP BY quiz_id", $user->getId()) ;
 if ($query->execute() && $query->hasResult()) {
   $result = $query->getResult() ;
 }
@@ -79,7 +79,7 @@ else {
           <tbody>
             <?php foreach ($grades as $grade) { ?>
             <tr>
-              <td><a href="grade.php?quiz=<?php echo $grade->quiz_id ; ?>""><?php echo $grade->quiz_name ; ?></a></th>
+              <td><a href="grades.php?quiz=<?php echo $grade->quiz_id ; ?>"><?php echo $grade->quiz_name ; ?></a></th>
               <td><?php echo $grade->correct."/".$grade->total ; ?></td>
               <td><?php echo (round($grade->correct/$grade->total*100, 2))."%" ; ?></td>
               <td><?php echo $grade->comments ; ?></td>
@@ -87,13 +87,13 @@ else {
           <?php } ?>
           </tbody>
         </table>
-
       </div>
-
-
     </main>
 
+    <?php include "modals/generic.php" ; ?>
+
     <script src="../js/jquery-3.3.1.js" crossorigin="anonymous"></script>
+    <script src="../js/student/student-grades.js" crossorigin="anonymous"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
   </body>

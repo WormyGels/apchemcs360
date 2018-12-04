@@ -19,3 +19,9 @@
   padding-top: 12px ;
   margin-bottom: 24px ;
 }
+.grade-info-label {
+  font-weight: bold ;
+}
+.grade-info-item {
+  font-weight: normal ;
+}

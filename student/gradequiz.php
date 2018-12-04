@@ -55,7 +55,7 @@ for ($i = 0 ; $i < count($questions) ; $i++) {
 $query2 = new Query("INSERT INTO grades (student_id, quiz_id, correct, total) VALUES (?, ?, ?, ?)", array($user->getId(), $quizId, $numCorrect, $numQuestions)) ;
 if ($query2->execute()) {
   //redirect
-  header("Location: grades.php") ; //TODO NOTE maybe change this to grade.php if that page gets made
+  header("Location: grades.php?quiz=".$quizId) ; //TODO NOTE maybe change this to grade.php if that page gets made
 }
 else {
   echo "There was a problem submitting your quiz." ;
