@@ -8,14 +8,13 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 * Instructors can create their own quizzes to give to their students.
 * Quizzes are multiple choice.
 * Student progress is displayed to them on a menu (default menu on login).
+* Instructors can change grades that were done automatically and provide feedback.
 
 ## Not Yet Implemented
-* Instructors can change grades that were done automatically.
 * Administrators have an overview of the docker containers.
 
 ## Todo
 ### Instructor Section
-* Gradebook
 * Overview (class averages?)
 
 ### Admin Section
@@ -25,6 +24,7 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 * Messages for bad login info (GET variable)
 
 ### Bugs
+* Probably plenty.
 
 #### Notes
 User: DemoInstructor

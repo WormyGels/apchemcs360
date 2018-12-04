@@ -79,7 +79,7 @@ else {
             <?php if (count($grades) > 0) { ?>
               <?php foreach ($grades as $grade) { ?>
               <tr>
-                <td><a href="grades.php?quiz=<?php echo $grade->quiz_id ; ?>"><?php echo $grade->quiz_name ; ?></a></th>
+                <td><a href="grades.php?quiz=<?php echo $grade->quiz_id ; ?>"><?php echo $grade->quiz_name ; ?></a></td>
                 <td><?php echo (round($grade->correct/$grade->total, 2)*$grade->points) ; ?></td>
                 <td><?php echo $grade->points ; ?></td>
                 <td><?php echo (round($grade->correct/$grade->total*100, 2))."%" ; ?></td>
