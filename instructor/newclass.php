@@ -21,6 +21,7 @@ $user = unserialize($_SESSION["user"]) ;
 if ($user->type() != 2) {
   header("Location: ../index.php") ;
 }
+$success = false ;
 //now we can check for form
 if (isset($_POST["classname"])) {
   $name = $_POST["classname"] ;
@@ -29,6 +30,7 @@ if (isset($_POST["classname"])) {
   $query = new Query("INSERT INTO classes (instructor_id, class_name, join_key) VALUES (?, ?, ?)", array($user->getId(), $name, $key)) ;
   if ($query->execute()) {
     $message = "Class \"$name\" created. Give key \"$key\" to your students." ;
+    $success = true ;
   }
   else {
     $message = "There was a problem creating the class." ;
@@ -78,5 +80,8 @@ if (isset($_POST["classname"])) {
     <script src="../js/jquery-3.3.1.js" crossorigin="anonymous"></script>
     <script src="../js/popper.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+
+    <?php if ($success) require "modals/generic.php" ; ?>
+
   </body>
 </html>
