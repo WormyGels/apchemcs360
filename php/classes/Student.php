@@ -21,7 +21,24 @@ function getClass($student) {
   }
   return null ;
 }
-
+//checks to see if the quizId is for the passed student is for their class
+function hasQuiz($student, $quizId) {
+  require_once "Query.php" ;
+  $query = new Query("SELECT quiz_id FROM quizzes, in_class, classes WHERE student_id=?", $student->getId()) ;
+  if ($query->execute() && $query->hasResult()) {
+    return true ;
+  }
+  return false ;
+}
+//checks to see if the student has already taken the passed quiz
+function hasTakenQuiz($student, $quizId) {
+  require_once "Query.php" ;
+  $query = new Query("SELECT quiz_id FROM grades WHERE student_id=?", $student->getId()) ;
+  if ($query->execute() && $query->hasResult()) {
+    return true ;
+  }
+  return false ;
+}
 class Student implements User {
 
   private $id ;

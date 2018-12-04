@@ -6,3 +6,16 @@
 .section {
   padding-bottom: 24px ;
 }
+.radio {
+  margin: 4px ;
+}
+
+.question {
+  border-bottom: 1px solid #dee2e6 ;
+  padding-bottom: 12px ;
+  padding-top: 12px ;
+}
+.submit-btn-container {
+  padding-top: 12px ;
+  margin-bottom: 24px ;
+}

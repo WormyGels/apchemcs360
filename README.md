@@ -26,3 +26,5 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 
 ### General
 * Messages for bad login info (GET variable)
+
+### Bugs

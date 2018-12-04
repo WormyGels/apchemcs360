@@ -29,10 +29,18 @@ if (isset($_GET["class"])) {
     $joinKey = $query->getResult()->join_key ;
     //categories and quizzes
     if ($query2->execute() && $query2->hasResult()) {
-      $quizzes = $query2->getResult() ;
+      $quizQuery = $query2->getResult() ;
     }
   }
 
+  $quizzes = [] ;
+  //it always needs to be an array
+  if (count($quizQuery) == 1) {
+    $quizzes[0] = $quizQuery ;
+  }
+  else {
+    $quizzes = $quizQuery ;
+  }
 }
 
 ?>

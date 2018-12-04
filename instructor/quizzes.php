@@ -45,6 +45,8 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
     $quizAnsE = $_POST["answere"] ;
     $quizAnsF = $_POST["answerf"] ;
     $quizCorAns = $_POST["answercor"] ;
+    if (!isset($quizCorAns[1]))
+      $quizCorAns[1] = 1 ;
     for($i = 0 ; $i < count($quizQuestions) ; $i++) {
       $questionText = $quizQuestions[$i] ;
       $ansA = $quizAnsA[$i] ;
@@ -53,7 +55,7 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
       $ansD = $quizAnsD[$i] ;
       $ansE = $quizAnsE[$i] ;
       $ansF = $quizAnsF[$i] ;
-      $corAns = $quizCorAns[$i] ;
+      $corAns = $quizCorAns[$i+1] ;
       $question = new Query("INSERT INTO quiz_questions (quiz_id, question_text, ans1_text, ans2_text, ans3_text, ans4_text, ans5_text, ans6_text, correct_answer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", array($quizId, $questionText, $ansA, $ansB, $ansC, $ansD, $ansE, $ansF, $corAns)) ;
       if ($question->execute()) {
         $successModal = true ;
@@ -135,11 +137,11 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
               <div class="form-row">
                 <div class="col-sm-6">
                   <label>Quiz Category</label>
-                  <input id="quiz-category" name="quiz_category" type="text" class="form-control" placeholder="Quiz Category">
+                  <input id="quiz-category" name="quiz_category" type="text" class="form-control" required placeholder="Quiz Category">
                 </div>
                 <div class="col-sm-6">
                   <label>Quiz Name</label>
-                  <input name="quiz_name" type="text" class="form-control" placeholder="Quiz Name">
+                  <input name="quiz_name" type="text" class="form-control" required placeholder="Quiz Name">
                 </div>
               </div>
             </div>
@@ -147,53 +149,53 @@ if ($quizQuery->execute() && $quiz->execute() && $quiz->hasResult()) {
               <div class="form-row">
                 <div class="col-sm-12">
                   <label>Question 1</label>
-                  <input name="question[]" type="text" class="form-control" placeholder="Question">
+                  <input name="question[]" type="text" class="form-control" required placeholder="Question">
                 </div>
                 <div class="col-sm-2">
                   <label>A</label>
-                  <input name="answera[]" type="text" class="form-control" placeholder="A">
+                  <input name="answera[]" type="text" class="form-control" required placeholder="A">
                 </div>
                 <div class="col-sm-2">
                   <label>B</label>
-                  <input name="answerb[]" type="text" class="form-control" placeholder="B">
+                  <input name="answerb[]" type="text" class="form-control" required placeholder="B">
                 </div>
                 <div class="col-sm-2">
                   <label>C</label>
-                  <input name="answerc[]" type="text" class="form-control" placeholder="C">
+                  <input name="answerc[]" type="text" class="form-control" required placeholder="C">
                 </div>
                 <div class="col-sm-2">
                   <label>D</label>
-                  <input name="answerd[]" type="text" class="form-control" placeholder="D">
+                  <input name="answerd[]" type="text" class="form-control" required placeholder="D">
                 </div>
                 <div class="col-sm-2">
                   <label>E</label>
-                  <input name="answere[]" type="text" class="form-control" placeholder="E">
+                  <input name="answere[]" type="text" class="form-control" required placeholder="E">
                 </div>
                 <div class="col-sm-2">
                   <label>F</label>
-                  <input name="answerf[]" type="text" class="form-control" placeholder="F">
+                  <input name="answerf[]" type="text" class="form-control" required placeholder="F">
                 </div>
               </div>
               <div class="text-left" style="padding-top:20px ;">
                 <label>Correct Answer</label><br>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-secondary active">
-                    <input value=1 type="radio" name="answercor" autocomplete="off" checked="checked" checked> A
+                    <input value=1 type="radio" name="answercor[]" autocomplete="off" checked="checked" checked> A
                   </label>
                   <label class="btn btn-secondary">
-                    <input  value=2 type="radio" name="answercor" autocomplete="off"> B
+                    <input  value=2 type="radio" name="answercor[1]" autocomplete="off"> B
                   </label>
                   <label class="btn btn-secondary">
-                    <input value=3 type="radio" name="answercor" autocomplete="off"> C
+                    <input value=3 type="radio" name="answercor[1]" autocomplete="off"> C
                   </label>
                   <label class="btn btn-secondary">
-                    <input value=4 type="radio" name="answercor" autocomplete="off"> D
+                    <input value=4 type="radio" name="answercor[1]" autocomplete="off"> D
                   </label>
                   <label class="btn btn-secondary">
-                    <input value=5 type="radio" name="answercor" autocomplete="off"> E
+                    <input value=5 type="radio" name="answercor[1]" autocomplete="off"> E
                   </label>
                   <label class="btn btn-secondary">
-                    <input value=6 type="radio" name="answercor" autocomplete="off"> F
+                    <input value=6 type="radio" name="answercor[1]" autocomplete="off"> F
                   </label>
                 </div>
               </div>

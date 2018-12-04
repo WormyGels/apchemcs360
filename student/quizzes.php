@@ -21,15 +21,24 @@ if (!inClass($user)) {
 
 //get a list of the quizzes for the class that the student has not taken
 $noQuiz = false ;
-$quizzes = [] ;
+$result = [] ;
 //NOTE this currently displays all quizzes not just the ones that aren't taken by the student, will probably change this later
 $query = new Query("SELECT quiz_id, quiz_name, quiz_category FROM quizzes WHERE class_id=?", getClass($user)) ;
 if ($query->execute() && $query->hasResult()) {
-  $quizzes = $query->getResult() ;
+  $result = $query->getResult() ;
 
 }
 else {
   $noQuiz = true ;
+}
+
+$quizzes = [] ;
+//it always needs to be an array
+if (count($result) == 1) {
+  $quizzes[0] = $result ;
+}
+else {
+  $quizzes = $result ;
 }
 
 //create a list of the categories
