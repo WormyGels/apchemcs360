@@ -21,12 +21,11 @@ if (!inClass($user)) {
 
 $result = [] ;
 //get an array of quizzes for the student
-$query = new Query("SELECT grades.quiz_id, correct, total, comments, quiz_name FROM grades, quizzes WHERE student_id=? AND quizzes.quiz_id=grades.quiz_id GROUP BY quiz_id", $user->getId()) ;
+$query = new Query("SELECT grades.quiz_id, correct, total, comments, quiz_name, points FROM grades, quizzes WHERE student_id=? AND quizzes.quiz_id=grades.quiz_id GROUP BY quiz_id", $user->getId()) ;
 if ($query->execute() && $query->hasResult()) {
   $result = $query->getResult() ;
 }
 
-echo count($result) ;
 $grades = [] ;
 if (count($result) == 1) {
   $grades[0] = $result ;
@@ -70,7 +69,8 @@ else {
           <thead>
             <tr>
               <th scope="col">Quiz Name</th>
-              <th scope="col">Score</th>
+              <th scope="col">Points Earned</th>
+              <th scope="col">Points Possible</th>
               <th scope="col">Percentage</th>
               <th scope="col">Instructor Feedback</th>
             </tr>
@@ -80,7 +80,8 @@ else {
               <?php foreach ($grades as $grade) { ?>
               <tr>
                 <td><a href="grades.php?quiz=<?php echo $grade->quiz_id ; ?>"><?php echo $grade->quiz_name ; ?></a></th>
-                <td><?php echo $grade->correct."/".$grade->total ; ?></td>
+                <td><?php echo (round($grade->correct/$grade->total, 2)*$grade->points) ; ?></td>
+                <td><?php echo $grade->points ; ?></td>
                 <td><?php echo (round($grade->correct/$grade->total*100, 2))."%" ; ?></td>
                 <td><?php echo $grade->comments ; ?></td>
               </tr>

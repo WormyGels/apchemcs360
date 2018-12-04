@@ -1,28 +1,25 @@
 # CS 360 - WKU - AP Chemistry
-Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software Engineering) at Western Kentucky University. Designed to be a tutoring website for high school students taking AP Chemistry. Will have the following functionality:
+Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software Engineering) at Western Kentucky University. Designed to be a tutoring website for high school students taking AP Chemistry. Due to time constraints, this site only has the following functionality:
+## Currently Implemented
 * Administrator, Instructor, and Student account types.
 * Students join classes via a class ID that is given to an Instructor when they create a class.
 * Instructors can have multiple classes.
 * Students can only be in one class.
-* Automatically created quizzes pertaining to certain sections of AP Chemistry textbook.
 * Instructors can create their own quizzes to give to their students.
-* Quizzes are multiple choice and free response. (but not mixed)
+* Quizzes are multiple choice.
+
+## Not yet implemented
 * Student progress is displayed to them on a menu (default menu on login).
-* Instructors can change grades that were done automatically or they did themselves.
-* Students get notifications for when an assignment has been graded.
-* Instructors can post announcements.
-* (Maybe) AP Chemistry e-text that students can look at on site.
-* Administrators can delete student accounts, change their password, move the class they're in.
+* Instructors can change grades that were done automatically.
+* Administrators have an overview of the docker containers.
 
 ## Todo
 ### Instructor Section
 * Modal for class creation
-* Quiz types later
 * Waiting on student for gradebook
 
 ### Student Section
-* Take a quiz
-* View grades
+* Progress at login
 
 ### General
 * Messages for bad login info (GET variable)

@@ -13,14 +13,17 @@ $(function() {
     var name = jsonResp.name ;
     var total = jsonResp.total ;
     var correct = jsonResp.correct ;
+    var points = jsonResp.points ;
     var comment = jsonResp.comment ;
     if (comment == "") {
       comment = "n/a" ;
     }
 
     var body = "<span class='grade-info-label'>Correct: <span class='grade-info-item'>"+correct+"</span></span>" ;
-    body += "<br><span class='grade-info-label'>Total: <span class='grade-info-item'>"+total+"</span></span>"
+    body += "<br><span class='grade-info-label'>Questions: <span class='grade-info-item'>"+total+"</span></span>"
     body += "<br><span class='grade-info-label'>Score: <span class='grade-info-item'>"+round(correct/total*100)+"%</span></span>" ;
+    body += "<br><span class='grade-info-label'>Points Earned: <span class='grade-info-item'>"+round(correct/total*points)+"</span></span>" ;
+    body += "<br><span class='grade-info-label'>Points Possible: <span class='grade-info-item'>"+points+"</span></span>" ;
     body += "<br><span class='grade-info-label'>Instructor Feedback</span>"
     body += "<br><span class='grade-info-item'>"+comment+"</span>"
 
