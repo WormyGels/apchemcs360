@@ -8,7 +8,7 @@ Created by Jeremy Wells, Austin Kirby, and Stephen Green for CS 360 (Software En
 * Instructors can create their own quizzes to give to their students.
 * Quizzes are multiple choice.
 
-## Not yet implemented
+## Not Yet Implemented
 * Student progress is displayed to them on a menu (default menu on login).
 * Instructors can change grades that were done automatically.
 * Administrators have an overview of the docker containers.
