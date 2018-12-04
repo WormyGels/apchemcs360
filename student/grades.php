@@ -24,7 +24,6 @@ $result = [] ;
 $query = new Query("SELECT grades.quiz_id, correct, total, comments, quiz_name FROM grades, quizzes WHERE student_id=? AND quizzes.quiz_id = grades.quiz_id GROUP BY quiz_id", $user->getId()) ;
 if ($query->execute() && $query->hasResult()) {
   $result = $query->getResult() ;
-  print_r($result) ;
 }
 
 $grades = [] ;
