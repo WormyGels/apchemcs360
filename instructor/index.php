@@ -16,6 +16,23 @@ if ($user->type() != 2) {
   header("Location: ../index.php") ;
 }
 
+require_once("../php/classes/Query.php") ;
+$query = new Query("SELECT COUNT(in_class.class_id) AS classes, COUNT(in_class.student_id) AS students
+FROM classes, in_class
+WHERE classes.class_id=in_class.class_id AND instructor_id=?
+GROUP BY instructor_id", $user->getId()) ;
+
+$classes = 0 ;
+$students = 0 ;
+$hasClasses = false ;
+if ($query->execute() && $query->hasResult()) {
+  $hasClasses = true ;
+  $result = $query->getResult() ;
+  $students = $result->students ;
+  $classes = $result->classes ;
+
+}
+
 ?>
 
 <!doctype html>
@@ -34,6 +51,9 @@ if ($user->type() != 2) {
 
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
+
+    <link href="../css/main.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -41,12 +61,17 @@ if ($user->type() != 2) {
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Overview</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <!-- <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button> -->
-        </div>
+        <div class="btn-toolbar mb-2 mb-md-0"></div>
+      </div>
+      <div>
+        <h4>Welcome <?php echo $user->getUsername() ; ?>!</h4>
+        <?php if ($hasClasses) {?>
+        <label class="block-label">You have <?php echo $classes ; ?> classes.</label>
+        <label class="block-label">You have <?php echo $students ; ?> students.</label>
+
+      <?php } else {?>
+          <h6>You have no classes.</h6>
+      <?php } ?>
       </div>
     </main>
 
