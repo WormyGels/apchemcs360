@@ -4,6 +4,11 @@ session_start() ;
 if (isset($_SESSION["user"])) {
   header("Location: php/splash.php") ;
 }
+
+$failure = false ;
+if (isset($_GET["fail"])) {
+  $failure = true ;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -74,9 +79,37 @@ if (isset($_SESSION["user"])) {
       </footer>
     </div>
 
+    <div id="failModal" class="modal fade"tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="modal-title" style="text-shadow: none ; color: black ;" class="modal-title">Bad Key</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="modal-body" style="text-align: left ; text-shadow: none ; color: black ;" class="modal-body">
+            You have entered an incorrect special key.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="js/jquery-3.3.1.js" crossorigin="anonymous"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/register/register.js" crossorigin="anonymous"></script>
+
+    <?php if ($failure) {?>
+    <script>
+      $(function() {
+        $("#failModal").modal() ;
+      }) ;
+    </script>
+    <?php } ?>
+
   </body>
 </html>
